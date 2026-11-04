@@ -1,0 +1,78 @@
+/* Deck-level helpers. Slide geometry is in canvas px (960×540). Row colours
+   live in setops.ts; the components (DbTable, Venn, Scope, …) apply them. */
+
+/* Line content up with the bullet text: the theme indents list text by
+   0.6em + 1.1em, and Slidev pads each <li> by another 0.2em. */
+.bullet-indent {
+  padding-left: 1.9em;
+}
+
+/* A row that reads left to right: input table(s) → query → result table(s).
+   Items are centred vertically, so arrows and the query sit mid-height. */
+.pipeline {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.pipeline .group {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+/* Room between the two input tables for the lines that pair equal rows. */
+.pipeline .group.inputs {
+  gap: 40px;
+}
+
+/* Holds a code block plus <Scope> boxes behind some of its lines. flow-root
+   keeps the code's top margin inside, so the boxes can count lines from 8px. */
+.code-scope {
+  position: relative;
+  isolation: isolate;
+  display: flow-root;
+  width: fit-content;
+}
+
+/* Magic-move blocks get a 6px left inset from the theme (meant for their line
+   numbers); without line numbers, keep them flush like plain code blocks.
+   (`html` outranks the theme's rule, which uses the same selector.) */
+html .slidev-layout.db-default .shiki-magic-move-container.slidev-code {
+  --slidev-code-padding: 4px 10px 4px 0;
+}
+
+/* Reserve the height of a 3-line code block, so a magic-move that grows from
+   2 to 3 lines doesn't push the table below it down. */
+.lines-3 {
+  min-height: calc(3 * var(--slidev-code-font-size) * var(--slidev-code-line-height) + 16px);
+}
+
+/* Intro slide: each flavour next to a small picture of it. */
+.flavors {
+  display: grid;
+  grid-template-columns: 570px auto;
+  align-items: center;
+  row-gap: 14px;
+}
+.slidev-layout .flavors .venn figcaption {
+  font-size: var(--db-fs-table);
+}
+
+/* The asterisk after "DISTINCT ON" points to the footnote: small and muted. */
+.slidev-layout.db-default h2 sup {
+  font-size: 0.6em;
+  font-weight: 400;
+  color: var(--db-text);
+}
+
+/* "*PostgreSQL only" note, bottom right above the footer. */
+.footnote {
+  position: absolute;
+  right: 29px;
+  bottom: 46px;
+  width: 152px;
+  padding-top: 2px;
+  border-top: 1px solid var(--db-table-rule);
+  text-align: right;
+  font-size: calc(9 * var(--db-pt));
+  color: var(--db-text);
+}

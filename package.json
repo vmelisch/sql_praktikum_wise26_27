@@ -1,0 +1,13 @@
+{
+  "name": "sql_praktikum_wise26_27",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.7.0",
+  "scripts": {
+    "dev:week-02": "pnpm --filter @sql-praktikum/week-02-subqueries dev",
+    "dev:week-04": "pnpm --filter @sql-praktikum/week-04-set-operations dev",
+    "build:week-02": "pnpm --filter @sql-praktikum/week-02-subqueries build",
+    "build:week-04": "pnpm --filter @sql-praktikum/week-04-set-operations build",
+    "build:all": "node scripts/build-all.mjs"
+  }
+}
