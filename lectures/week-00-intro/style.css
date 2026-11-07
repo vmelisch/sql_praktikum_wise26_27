@@ -1,0 +1,118 @@
+/* Deck-level helpers for Week 0: Intro */
+
+/* Aside table/card in the top-right corner of a default-layout slide. */
+.aside {
+  float: right;
+  margin-left: 28px;
+  margin-bottom: 14px;
+}
+html .slidev-layout.db-default .aside + :is(h2, h3) {
+  margin-top: 0;
+}
+
+/* Line content up with the bullet text: the theme indents list text by
+   0.6em + 1.1em, and Slidev pads each <li> by another 0.2em. */
+.bullet-indent {
+  padding-left: 1.9em;
+}
+
+/* Prevent horizontal scrollbars / sliders from ever appearing on slide code blocks */
+.slidev-code,
+.slidev-code pre {
+  overflow-x: hidden !important;
+}
+
+/* Let the browser avoid a lone word on the last line of a callout. */
+.slidev-layout .db-takeaway__body {
+  text-wrap: pretty;
+}
+
+/* Staff and historical figure cards */
+.person-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.person-card img {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--db-heading-blue);
+}
+.person-info {
+  display: flex;
+  flex-direction: column;
+}
+.person-name {
+  font-weight: 600;
+  color: var(--db-text-soft);
+}
+.person-sub {
+  font-size: var(--db-fs-small);
+  color: var(--db-text);
+}
+
+/* History photos grid */
+.history-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 16px;
+}
+.history-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.history-item img {
+  height: 120px;
+  object-fit: cover;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  margin-bottom: 8px;
+}
+.history-caption {
+  font-size: var(--db-fs-small);
+  line-height: 1.3;
+}
+
+/* Criticism / quote cards */
+.criticism-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.criticism-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.criticism-card img {
+  border-radius: 4px;
+  border: 1px solid var(--db-table-rule);
+}
+
+/* Road map table: highlight current week */
+.roadmap-table tr.active td {
+  font-weight: 700;
+  color: var(--db-heading-blue);
+  background-color: rgba(47, 87, 178, 0.08);
+}
+
+/* Architecture pipeline */
+.arch-diagram {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+/* Truth tables in 2 columns */
+.truth-tables {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}

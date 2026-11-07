@@ -1,0 +1,32 @@
+/* Deck-level helpers. Slide geometry is in canvas px (960×540); type, lists,
+   tables and code come from the theme. Highlight colours live in tints.ts. */
+
+/* Code (and the tables that go with it) that belongs to a section lines up
+   with the section's bullet text: the theme indents list text by
+   0.6em + 1.1em, and Slidev pads each <li> by another 0.2em. (As in week 4.) */
+.bullet-indent {
+  padding-left: 1.9em;
+}
+
+/* Not all expressions are equal: an editor-style red squiggle under the part
+   of a query that is an error, transparent until the slide's timeline colours
+   it (together with the text). */
+.slidev-layout :is(.mark-not-bool, .mark-agg) {
+  text-decoration-line: underline;
+  text-decoration-style: wavy;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1.5px;
+  text-decoration-skip-ink: none;
+  text-underline-offset: 4px;
+}
+
+/* A data table in the top-right corner of a default-layout slide (as in
+   week 2). It floats, so long lines further down still get the full width; the
+   sub-header after it stays flush under the title. */
+.aside {
+  float: right;
+  margin-left: 28px;
+}
+html .slidev-layout.db-default .aside + :is(h2, h3) {
+  margin-top: 0;
+}

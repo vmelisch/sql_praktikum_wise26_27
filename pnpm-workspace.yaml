@@ -8,3 +8,5 @@ allowBuilds:
 
 minimumReleaseAgeExclude:
   - slidev-theme-tud-db@0.0.7
+  - slidev-theme-tud-db@0.0.8
+  - slidev-theme-tud-db@0.0.9
