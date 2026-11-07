@@ -15,9 +15,9 @@
   text-decoration-line: underline;
   text-decoration-style: wavy;
   text-decoration-color: transparent;
-  text-decoration-thickness: 1.5px;
+  text-decoration-thickness: 1px;
   text-decoration-skip-ink: none;
-  text-underline-offset: 4px;
+  text-underline-offset: 2px;
 }
 
 /* A data table in the top-right corner of a default-layout slide (as in
