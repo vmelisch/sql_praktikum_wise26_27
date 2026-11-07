@@ -1,0 +1,83 @@
+/* Deck-level helpers. Slide geometry is in canvas px (960×540); type, lists,
+   tables and code come from the theme. Highlight colours live in tints.ts. */
+
+/* Code (and the tables that go with it) that belongs to a section lines up
+   with the section's bullet text: the theme indents list text by
+   0.6em + 1.1em, and Slidev pads each <li> by another 0.2em. (As in weeks 1
+   and 4.) */
+.bullet-indent {
+  padding-left: 1.9em;
+}
+
+/* Something in the top-right corner of a default-layout slide (a Venn
+   diagram, as week 2's data tables). It floats, so long lines further down
+   still get the full width; the sub-header after it stays flush under the
+   title. */
+.aside {
+  float: right;
+  margin-left: 28px;
+}
+html .slidev-layout.db-default .aside + :is(h2, h3) {
+  margin-top: 0;
+}
+
+/* A join with its data, read left to right: left table ⋈ right table → result.
+   The inputs and the symbols between them are centred on each other; the
+   result starts at the top, as it may have more rows. */
+.join-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.join-row > .inputs {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* Words in the text coloured like what they refer to (see tints.ts): the
+   shared column name of a USING join; the table an outer join keeps all rows
+   of, and the one it only takes matching rows from. */
+.slidev-layout .shared {
+  color: var(--db-accent6);
+}
+.slidev-layout .kept-side {
+  color: var(--db-accent1);
+}
+.slidev-layout .match-side {
+  color: var(--db-accent3);
+}
+
+/* What happens to unmatched rows (Row Preservation (1)) */
+.slidev-layout .discarded {
+  color: var(--db-accent5);
+}
+.slidev-layout .kept {
+  color: var(--db-accent1);
+}
+
+/* Magic-move blocks get a 6px left inset from the theme (meant for their line
+   numbers); without line numbers, keep them flush like plain code blocks.
+   (`html` outranks the theme's rule, which uses the same selector. As in
+   week 4.) */
+html .slidev-layout.db-default .shiki-magic-move-container.slidev-code {
+  --slidev-code-padding: 4px 10px 4px 0;
+}
+
+/* The summary table is the slide's only content: full width, body-size text.
+   (As in week 2.) */
+.summary {
+  --db-fs-table: var(--db-fs-body);
+}
+
+/* An editor-style red squiggle under the part of a query that is an error
+   (as in week 1), transparent until the slide's timeline colours it together
+   with the text. */
+.slidev-layout .mark-bad {
+  text-decoration-line: underline;
+  text-decoration-style: wavy;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1px;
+  text-decoration-skip-ink: none;
+  text-underline-offset: 2px;
+}

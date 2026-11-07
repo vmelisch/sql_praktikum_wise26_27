@@ -7,10 +7,12 @@
     "dev:week-00": "pnpm --filter @sql-praktikum/week-00-intro dev",
     "dev:week-01": "pnpm --filter @sql-praktikum/week-01-case dev",
     "dev:week-02": "pnpm --filter @sql-praktikum/week-02-subqueries dev",
+    "dev:week-03": "pnpm --filter @sql-praktikum/week-03-joins dev",
     "dev:week-04": "pnpm --filter @sql-praktikum/week-04-set-operations dev",
     "build:week-00": "pnpm --filter @sql-praktikum/week-00-intro build",
     "build:week-01": "pnpm --filter @sql-praktikum/week-01-case build",
     "build:week-02": "pnpm --filter @sql-praktikum/week-02-subqueries build",
+    "build:week-03": "pnpm --filter @sql-praktikum/week-03-joins build",
     "build:week-04": "pnpm --filter @sql-praktikum/week-04-set-operations build",
     "build:all": "node scripts/build-all.mjs"
   },
