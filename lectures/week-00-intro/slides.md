@@ -10,6 +10,8 @@ addons:
 
 Data Management Lab, Winter Semester 2026/27
 
+<SlidesQr class="cover-qr" />
+
 ---
 layout: two-cols-header
 columns: 42fr 58fr

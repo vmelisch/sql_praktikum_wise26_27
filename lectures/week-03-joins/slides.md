@@ -8,6 +8,8 @@ layout: cover
 
 Data Management Lab, Winter Semester 2026/27
 
+<SlidesQr class="cover-qr" />
+
 ---
 layout: two-cols-grid
 ---

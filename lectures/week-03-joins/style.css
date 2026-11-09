@@ -107,3 +107,12 @@ html .slidev-layout.db-default .shiki-magic-move-container.slidev-code {
   text-decoration-skip-ink: none;
   text-underline-offset: 2px;
 }
+
+/* QR code of the slides on the cover (components/SlidesQr.vue): bottom right
+   of the white area, next to the title. The cover's title box is the
+   positioned parent; it starts 30px below the navy band. */
+.cover-qr {
+  position: absolute;
+  top: -16px;
+  right: 0;
+}
