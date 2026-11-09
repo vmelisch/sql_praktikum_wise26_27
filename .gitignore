@@ -4,3 +4,8 @@ notes/
 .DS_Store
 *.local
 .env
+
+# local working folders
+.claude/
+scratch/
+slides_sose26/
