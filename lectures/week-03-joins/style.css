@@ -9,6 +9,32 @@
   padding-left: 1.9em;
 }
 
+/* Tables a size lighter than the theme's: rows of about 21px instead of the
+   template's 26px, semibold headers and a faint zebra. (`html` outranks the
+   theme's rules, which use the same selectors.) */
+html .slidev-layout.db-default :is(th, td) {
+  padding: 1px 10px 2px;
+  line-height: 1.35;
+}
+html .slidev-layout.db-default thead th {
+  font-weight: 600;
+}
+html .slidev-layout.db-default tbody tr:nth-child(odd) {
+  background: #f2f2f2;
+}
+
+/* A value marked in a table (a matching key, a shared column, a NULL that
+   was filled in): a small rounded label that the slide's script colours,
+   instead of tinting the whole cell. The scripts make the chips at runtime
+   (tints.ts: chip), so this rule is global. */
+.slidev-layout .key-chip {
+  display: inline-block;
+  min-width: 1.8em;
+  padding: 0 0.45em;
+  border-radius: 0.75em;
+  line-height: 1.4;
+}
+
 /* Something in the top-right corner of a default-layout slide (a Venn
    diagram, as week 2's data tables). It floats, so long lines further down
    still get the full width; the sub-header after it stays flush under the

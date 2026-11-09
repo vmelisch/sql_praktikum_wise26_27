@@ -22,7 +22,7 @@ const slide = useSlide()
 
 onMounted(() => {
   const root = slide.value!
-  // an order and the customer it belongs to share a colour in their c_id cells
+  // an order and the customer it belongs to share a colour in their c_id chips
   tintKeys(root)
 
   tl.step()
@@ -253,16 +253,16 @@ layout: default
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { useSlide, useTl } from 'slidev-addon-gsap'
-import { column, TINT } from './tints'
+import { chip, column, TINT } from './tints'
 
 const tl = useTl()
 const slide = useSlide()
 
 onMounted(() => {
-  // the column both tables share, purple as the "same" name in the text (in
-  // the output too, where it appears only once)
+  // the column both tables share, in purple chips as the "same" name in the
+  // text (in the output too, where it appears only once)
   for (const th of column(slide.value!, 'c_id').head)
-    th.style.backgroundColor = TINT.purple
+    chip(th).style.backgroundColor = TINT.purple
 
   tl.step()
     // click 1: USING with the tables it joins
@@ -355,7 +355,7 @@ layout: default
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { useSlide, useTl } from 'slidev-addon-gsap'
-import { column, TINT, tintIn } from './tints'
+import { chip, chips, column, TINT, tintIn } from './tints'
 
 const tl = useTl()
 const slide = useSlide()
@@ -363,15 +363,17 @@ const slide = useSlide()
 onMounted(() => {
   const root = slide.value!
   const head = (table: string, name: string) => column(root.querySelector(table)!, name).head
-  // the column both tables share from the start, purple as on the USING slide
+  // the column both tables share from the start, in purple chips as on the
+  // USING slide
   for (const th of head('.natural-data', 'c_id'))
-    th.style.backgroundColor = TINT.purple
+    chip(th).style.backgroundColor = TINT.purple
   // the customers' column renamed at click 2, its width kept, so the shorter
   // name doesn't shift the tables beside it
   const [renamed] = head('.customers', 'customer')
   renamed.style.minWidth = `${renamed.offsetWidth}px`
-  // then the column named alike by accident: in both tables and in the output
-  const clash = [renamed, ...head('.orders', 'name'), ...head('.out-empty', 'name')]
+  // then the column named alike by accident, in red chips: in both tables
+  // and in the output
+  const clash = chips([renamed, ...head('.orders', 'name'), ...head('.out-empty', 'name')])
 
   tl.step()
     // click 1: the join on data: only c_id is shared, so it is the whole
@@ -380,7 +382,7 @@ onMounted(() => {
     .step()
     // click 2: customer is renamed to name: now name is shared too, the
     // product's name is compared with the customer's, and no row matches
-    .textSwap(renamed, 'name', { duration: 0.5 })
+    .textSwap(clash[0], 'name', { duration: 0.5 })
     .fromTo(...tintIn(clash, 'red'), '<')
     .to('.out-ok', { opacity: 0, duration: 0.4 }, '<')
     .fadeIn('.out-empty', {}, '<')
@@ -587,7 +589,7 @@ import { useSlide } from 'slidev-addon-gsap'
 import { tintKeys } from './tints'
 
 const slide = useSlide()
-// orders and customers that find a partner share a colour in their c_id cells
+// orders and customers that find a partner share a colour in their c_id chips
 onMounted(() => tintKeys(slide.value!, { 1: 'teal', 3: 'purple' }))
 </script>
 
@@ -655,16 +657,16 @@ layout: default
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { useSlide, useTl } from 'slidev-addon-gsap'
-import { markColor, tintIn, tintKeys } from './tints'
+import { chips, markColor, tintIn, tintKeys } from './tints'
 
 const tl = useTl()
 const slide = useSlide()
 
 onMounted(() => {
   const root = slide.value!
-  // orders and customers that find a partner share a colour in their c_id cells
+  // orders and customers that find a partner share a colour in their c_id chips
   tintKeys(root, { 1: 'teal', 3: 'purple' })
-  const nulls = [...root.querySelectorAll<HTMLElement>('.result td')].filter(td => td.textContent!.trim() === 'NULL')
+  const nulls = chips([...root.querySelectorAll<HTMLElement>('.result td')].filter(td => td.textContent!.trim() === 'NULL'))
 
   tl.step()
     // click 1: the left table, the one LEFT JOIN keeps all rows of
@@ -750,16 +752,16 @@ layout: default
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { useSlide, useTl } from 'slidev-addon-gsap'
-import { markColor, tintIn, tintKeys } from './tints'
+import { chips, markColor, tintIn, tintKeys } from './tints'
 
 const tl = useTl()
 const slide = useSlide()
 
 onMounted(() => {
   const root = slide.value!
-  // orders and customers that find a partner share a colour in their c_id cells
+  // orders and customers that find a partner share a colour in their c_id chips
   tintKeys(root, { 1: 'teal', 3: 'purple' })
-  const nulls = [...root.querySelectorAll<HTMLElement>('.result td')].filter(td => td.textContent!.trim() === 'NULL')
+  const nulls = chips([...root.querySelectorAll<HTMLElement>('.result td')].filter(td => td.textContent!.trim() === 'NULL'))
 
   tl.step()
     // click 1: the left table, which RIGHT JOIN only takes matching rows from
@@ -849,7 +851,7 @@ import { useSlide } from 'slidev-addon-gsap'
 import { tintKeys } from './tints'
 
 const slide = useSlide()
-// orders and customers that find a partner share a colour in their c_id cells
+// orders and customers that find a partner share a colour in their c_id chips
 onMounted(() => tintKeys(slide.value!, { 1: 'teal', 3: 'purple' }))
 </script>
 
@@ -1097,20 +1099,20 @@ layout: default
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { useSlide, useTl } from 'slidev-addon-gsap'
-import { cells, rows, text, tintIn } from './tints'
+import { chips, rows, text, tintIn } from './tints'
 
 const tl = useTl()
 const slide = useSlide()
 
 onMounted(() => {
   const root = slide.value!
-  // an order's rows, by its id: in orders (column 0) and in both outputs
+  // an order's id, as a chip: in orders (column 0) and in both outputs
   // (column 3)
-  const order = (id: string) => cells([
-    ...rows(root, '.orders').filter(r => text(r, 0) === id),
-    ...rows(root, '.outs').filter(r => text(r, 3) === id),
+  const order = (id: string) => chips([
+    ...rows(root, '.orders').filter(r => text(r, 0) === id).map(r => r.cells[0]),
+    ...rows(root, '.outs').filter(r => text(r, 3) === id).map(r => r.cells[3]),
   ])
-  const bob = cells(rows(root, '.outs').filter(r => text(r, 1) === 'Bob'))
+  const bob = chips(rows(root, '.outs').filter(r => text(r, 1) === 'Bob').map(r => r.cells[1]))
 
   tl.step()
     // click 1: the plain LEFT JOIN: every order of every customer
@@ -1262,23 +1264,25 @@ layout: default
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { useSlide, useTl } from 'slidev-addon-gsap'
-import { cells, rows, text, tintIn } from './tints'
+import { chips, rows, text, tintIn } from './tints'
 
 const tl = useTl()
 const slide = useSlide()
 
 onMounted(() => {
   const root = slide.value!
-  // shipment 2, of order 3, which has no customer: only the RIGHT JOIN keeps it
-  const ship2 = cells([
-    ...rows(root, '.shipments').filter(r => text(r, 0) === '2'),
-    ...rows(root, '.out-seq').filter(r => text(r, 2) === '2'),
+  // shipment 2, of order 3, which has no customer: only the RIGHT JOIN keeps
+  // it (its id, as a chip, in shipments and in the first output)
+  const ship2 = chips([
+    ...rows(root, '.shipments').filter(r => text(r, 0) === '2').map(r => r.cells[0]),
+    ...rows(root, '.out-seq').filter(r => text(r, 2) === '2').map(r => r.cells[2]),
   ])
-  // Alice and Bob, who have no shipped order: only the outer LEFT JOIN keeps them
+  // Alice and Bob, who have no shipped order: only the outer LEFT JOIN keeps
+  // them (their names, as chips, in customers and in the second output)
   const unshipped = (r: HTMLTableRowElement, col: number) => ['Alice', 'Bob'].includes(text(r, col))
-  const customers = cells([
-    ...rows(root, '.customers').filter(r => unshipped(r, 1)),
-    ...rows(root, '.out-nested').filter(r => unshipped(r, 0)),
+  const customers = chips([
+    ...rows(root, '.customers').filter(r => unshipped(r, 1)).map(r => r.cells[1]),
+    ...rows(root, '.out-nested').filter(r => unshipped(r, 0)).map(r => r.cells[0]),
   ])
 
   tl.step()

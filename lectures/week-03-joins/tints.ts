@@ -1,12 +1,12 @@
 // The deck's highlight colours, as in weeks 1 and 2: the brand accents for
-// text, and the same accents mixed with white for table cells that text sits
-// on. A part of a query is highlighted by recolouring its text; the table
-// cells that go with it get the matching tint. (No yellow text: it is
-// unreadable on white.)
+// text, and the same accents mixed with white for the chips that mark values
+// in tables (see chip). A part of a query is highlighted by recolouring its
+// text; the table values that go with it get a chip in the matching tint.
+// (No yellow text: it is unreadable on white.)
 //
 // On the join slides, the colours mean:
 //   - KEY: an order and the customer it joins with share a colour in their
-//     c_id cells (as the coloured c_id values in the PowerPoint);
+//     c_id chips (as the coloured c_id values in the PowerPoint);
 //   - purple: the shared column of a USING join;
 //   - teal / blue: the table an outer join keeps all rows of / the one it
 //     only takes matching rows from.
@@ -55,12 +55,9 @@ export function outside(root: ParentNode, code: string, marks: string): HTMLElem
   return [...root.querySelectorAll<HTMLElement>(`${code} .line > *`)].filter(el => !keep.has(el))
 }
 
-/** The body rows of the tables matching `table`, and their cells. */
+/** The body rows of the tables matching `table`. */
 export function rows(root: ParentNode, table: string): HTMLTableRowElement[] {
   return [...root.querySelectorAll<HTMLTableRowElement>(`${table} tbody tr`)]
-}
-export function cells(rs: HTMLTableRowElement[]): HTMLTableCellElement[] {
-  return rs.flatMap(r => [...r.cells])
 }
 /** A cell's text. */
 export function text(row: HTMLTableRowElement, col: number): string {
@@ -100,14 +97,33 @@ export function column(root: ParentNode, name: string) {
 }
 
 /**
- * Tints the c_id cells of the tables under `root` by value, so that an order
- * and the customer it joins with share a colour. Only the values in `keys`
- * (the ones that find a partner) are tinted.
+ * Puts a table cell's content into a chip, the small rounded label that marks
+ * a value (see .key-chip in style.css), and returns the chip. A cell is
+ * chipped once; asking again returns its chip.
+ */
+export function chip(cell: HTMLElement): HTMLElement {
+  const own = cell.querySelector<HTMLElement>(':scope > .key-chip')
+  if (own)
+    return own
+  const span = document.createElement('span')
+  span.className = 'key-chip'
+  span.append(...cell.childNodes)
+  cell.append(span)
+  return span
+}
+export function chips(cellList: HTMLElement[]): HTMLElement[] {
+  return cellList.map(chip)
+}
+
+/**
+ * Marks the c_id values in the tables under `root` with chips in their
+ * colour, so that an order and the customer it joins with share a colour.
+ * Only the values in `keys` (the ones that find a partner) are marked.
  */
 export function tintKeys(root: ParentNode, keys: Record<string, Tint> = KEY) {
   for (const cell of column(root, 'c_id').body) {
     const t = keys[cell.textContent!.trim()]
     if (t)
-      cell.style.backgroundColor = TINT[t]
+      chip(cell).style.backgroundColor = TINT[t]
   }
 }
