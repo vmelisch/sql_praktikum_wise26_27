@@ -52,9 +52,11 @@ const activeStep = computed(() => Number(props.step) || 0)
           <path d="M 120 285 L 42 195" fill="none" stroke="#d97706" stroke-width="2" stroke-dasharray="3 3" marker-end="url(#arrow-amber)" />
         </g>
 
-        <!-- Arrow 2: Pointing to Operator Info -->
+        <!-- Arrow 2: Pointing to Operator Info. Ends on the bottom edge of the
+             hl-2 box (measured at y 227.5–249.8 in these units); the
+             head reaches ~1.2 units past the end, so its tip meets the border. -->
         <g class="arrow-anim" :class="{ 'is-visible': activeStep >= 2 }">
-          <path d="M 440 285 L 290 238" fill="none" stroke="#d97706" stroke-width="2" stroke-dasharray="3 3" marker-end="url(#arrow-amber)" />
+          <path d="M 440 285 L 329 250.2" fill="none" stroke="#d97706" stroke-width="2" stroke-dasharray="3 3" marker-end="url(#arrow-amber)" />
         </g>
 
         <!-- Arrow 3: Pointing to Cost Estimates -->

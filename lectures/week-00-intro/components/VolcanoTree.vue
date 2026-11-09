@@ -74,10 +74,14 @@ defineProps<{
       <path d="M 175 195 C 45 205, 45 281, 80 281" fill="none" stroke="#f59e0b" stroke-width="2.2" marker-end="url(#v-arrow-yellow)" />
       <text x="35" y="240" class="v-next-label">next()</text>
 
-      <!-- 10. Callout Frustum Lines (Slide 16 only) -->
+      <!-- 10. Callout lines from the join to the code box in the right column.
+           The ends sit on the box's rounded top-left / bottom-left corners
+           (box measured at x 420.6, y 57.5–245.7 in these units; 8px radius).
+           pathLength = 6n + 3 makes the 3,3 dashes start and end on a dash,
+           so neither end shows a gap. -->
       <g v-if="showCallout" class="v-callout-lines">
-        <line x1="305" y1="174" x2="424" y2="132" stroke="#475569" stroke-width="1.5" stroke-dasharray="3,3" />
-        <line x1="305" y1="200" x2="424" y2="242" stroke="#475569" stroke-width="1.5" stroke-dasharray="3,3" />
+        <line x1="305" y1="174" x2="423" y2="60" pathLength="165" stroke="#475569" stroke-width="1.5" stroke-dasharray="3,3" />
+        <line x1="305" y1="200" x2="423" y2="243.3" pathLength="123" stroke="#475569" stroke-width="1.5" stroke-dasharray="3,3" />
       </g>
     </svg>
   </div>

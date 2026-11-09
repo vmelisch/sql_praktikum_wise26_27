@@ -116,3 +116,25 @@ html .slidev-layout.db-default .aside + :is(h2, h3) {
   grid-template-columns: 1fr 1fr;
   gap: 24px;
 }
+
+/* Same footprint as a staff photo, so a card without one keeps its text aligned. */
+.person-card .no-photo {
+  width: 54px;
+  height: 54px;
+  flex-shrink: 0;
+}
+
+/* EXPLAIN in a nutshell: the code block opens (grid rows 0fr -> 1fr, animated
+   per click) and pushes the pgMustard figure down. The bottom padding is the
+   gap to the figure, so it collapses with the block. */
+.code-reveal {
+  display: grid;
+  grid-template-rows: 0fr;
+}
+.code-reveal > .code-output {
+  min-height: 0;
+  /* clip only vertically: the widest code line runs past the column */
+  overflow-x: visible;
+  overflow-y: clip;
+  padding-bottom: 12px;
+}

@@ -12,7 +12,7 @@ Data Management Lab, Winter Semester 2026/27
 
 ---
 layout: two-cols-header
-columns: 1fr 1fr
+columns: 42fr 58fr
 ---
 
 # Organization
@@ -22,15 +22,7 @@ columns: 1fr 1fr
 ## Who?
 
 <div class="person-card">
-  <img src="/images/staff_1.png" alt="Rico Bergmann & Jannis Kowalick" />
-  <div class="person-info">
-    <span class="person-name">Rico Bergmann</span>
-    <span class="person-sub">rico.bergmann1@tu-dresden.de</span>
-  </div>
-</div>
-
-<div class="person-card">
-  <img src="/images/staff_1.png" alt="Jannis Kowalick" />
+  <img src="/images/staff_2.jpg" alt="Jannis Kowalick" />
   <div class="person-info">
     <span class="person-name">Jannis Kowalick</span>
     <span class="person-sub">jannis.kowalick@tu-dresden.de</span>
@@ -38,10 +30,18 @@ columns: 1fr 1fr
 </div>
 
 <div class="person-card">
-  <img src="/images/staff_2.jpg" alt="Vincent Melisch" />
+  <div class="no-photo"></div>
   <div class="person-info">
     <span class="person-name">Vincent Melisch</span>
     <span class="person-sub">vincent.melisch@tu-dresden.de</span>
+  </div>
+</div>
+
+<div class="person-card">
+  <img src="/images/staff_1.png" alt="Rico Bergmann" />
+  <div class="person-info">
+    <span class="person-name">Rico Bergmann</span>
+    <span class="person-sub">rico.bergmann1@tu-dresden.de</span>
   </div>
 </div>
 
@@ -51,15 +51,15 @@ columns: 1fr 1fr
 
 ## For whom?
 
-- **Komplexpraktikum DB-Anwendungsentwicklung** (0/0/4)
-- Bachelor Informatik: INF-B-510 (Vertiefung) & INF-B-520 (Spezialisierung)
-- Bachelor Medien-Informatik: INF-B-530 (Vertiefung) & INF-B-540 (Spezialisierung)
+- Module **INF-25-Ba-P-DM: Data Management Lab**
+- Practice sessions, 4 SWS
+- Responsible: Prof. Dr. Dirk Habich, Chair of Databases
 
 ## When & Where?
 
-- **When**: Every Tuesday, 5th period (14:50 – 16:20 Uhr)
+- **When**: Every Tuesday, 2nd period (9:20 – 10:50 Uhr)
   - 11 weeks of content + this introduction
-- **Where**: APB-E067
+- **Where**: APB-E010
 
 ---
 layout: two-cols-header
@@ -95,48 +95,43 @@ columns: 55fr 45fr
   - Not a lecture!
   - No exercises!
   - Focus on **independent and self-driven work**!
-- **Weekly meetings**
-  - Consultation
-  - Presentation of results
 
 ---
 layout: two-cols-header
-columns: 55fr 45fr
+columns: 1fr 1fr
 ---
 
 # Organization
 
-::left::
-
 ## Grading
 
-- **Hand-in of weekly experimental protocols**
-  - Each week focuses on one specific advanced SQL feature
-  - Build your own queries, test and measure them
-  - Deadline is **15 minutes before the consultation** each Tuesday (14:35)
-  - We will grade the **8 best protocols** you hand in
-- One student is chosen each week to present their findings
-- Your final grade will be made up of **60% protocols** and **40% presentations**
+::takeaway{label="Admission to the oral exam" color="red"}
+At least **80%** of the course work points. Below that, the course is failed.
+::
+
+<div class="h-[11px]" />
+
+::left::
+
+## Course work (40%)
+
+- Weekly task sheet with SQL tasks
+- Solved in **groups of 3**, formed by you
+- Due next Tuesday, **9:19 a.m.**, before the lecture
+- Written in Overleaf with LaTeX
+- Graded: attendance, work in class, submission
 
 ::right::
 
-<div class="flex flex-col gap-4 mt-6">
-  <div class="p-4 rounded-lg bg-blue-50 border border-blue-200">
-    <div class="text-xs font-semibold text-blue-600 uppercase tracking-wide">Final Grade Weighting</div>
-    <div class="mt-2 text-sm text-gray-700">
-      <div><b>60%</b> Protocols (best 8)</div>
-      <div><b>40%</b> Presentations</div>
-    </div>
-  </div>
+## Oral exam (60%)
 
-  <div class="p-4 rounded-lg bg-amber-50 border border-amber-200">
-    <div class="text-xs font-semibold text-amber-700 uppercase tracking-wide">Weekly Deadline</div>
-    <div class="mt-2 text-sm text-gray-700">
-      <b>Tuesdays at 14:35</b> (strict)<br/>
-      15 minutes before consultation starts
-    </div>
-  </div>
-</div>
+- End of semester, 30 min per group
+- SQL tasks like the task sheets
+
+## Questions
+
+- Forum for questions on tasks
+- FAQ hours if needed
 
 ---
 layout: section-num
@@ -256,17 +251,12 @@ columns: 52fr 48fr
 
 ::left::
 
-## Weekly consultation
-
-- **Student presentation** of the previous week's findings
-- **Introduction** to the new subject by us
-
 ## Weekly practical tasks
 
-- Receive a weekly task sheet
-- Practice advanced SQL features **independently**
-- Build non-trivial queries, benchmark performance, and visualize trends
-- Write a concise experimental protocol interpreting the underlying database behavior!
+- You will receive a task sheet each week
+- Practice the use of advanced SQL features **independently**
+- Build your own queries, measure their performance, and visualize it
+- Write a short protocol of your experiments and results, **interpret your results!**
 
 ::right::
 
@@ -431,9 +421,11 @@ import { useTl } from 'slidev-addon-gsap'
 
 const tl = useTl()
 onMounted(() => {
+  // click 1: the code block opens above the pgMustard figure and pushes it
+  // down (one image, same size), then the code fades in once it's clear
   tl.step()
-    .morph('.pg-hero', '.pg-target', { duration: 0.6, ease: 'power2.inOut', scale: false })
-    .fadeIn('.code-output', { duration: 0.4 }, '<0.1')
+    .to('.code-reveal', { gridTemplateRows: '1fr', duration: 0.6, ease: 'power2.inOut' })
+    .fadeIn('.code-output', { duration: 0.4 }, '<0.35')
     .fadeIn('.explain-vs-analyze', { duration: 0.4 }, '<')
     .step()
 })
@@ -450,7 +442,7 @@ onMounted(() => {
 - Just prefix any SQL query with `{sql} EXPLAIN`
 - Retrieves the execution plan of the query
 - 1 row = 1 operator (most of the time)
-- Decent overview of operators: [\[0\]](https://www.pgmustard.com/docs/explain)
+- Decent overview of operators: [pgMustard](https://www.pgmustard.com/docs/explain)
 
 </div>
 
@@ -470,14 +462,9 @@ onMounted(() => {
 
 ::right::
 
-<div class="right-col-wrapper relative">
-  <!-- In 17.1, pg-hero sits prominently at the top -->
-  <div class="pg-hero absolute top-0 left-0 right-0">
-    <img src="/images/pgmustard.png" alt="pgMustard EXPLAIN tool" class="rounded border border-gray-300 shadow-sm max-h-[140px] w-auto" />
-    <span class="text-xs text-gray-500 mt-1 block">Visualizing plans with tools like <a href="https://www.pgmustard.com/docs/explain" target="_blank">pgmustard.com/docs/explain</a></span>
-  </div>
-
-  <!-- In 17.2, code-output appears and pg-target receives the morphed image below it -->
+<!-- Grid rows 0fr -> 1fr opens the code block without measuring it, so the
+     figure below slides down at its own size, also when entering at click 1. -->
+<div class="code-reveal">
   <div class="code-output text-xs">
 
 ```sql
@@ -491,11 +478,11 @@ Seq Scan on posts
 ```
 
   </div>
+</div>
 
-  <div class="pg-target mt-3">
-    <img src="/images/pgmustard.png" alt="pgMustard EXPLAIN tool" class="rounded border border-gray-300 shadow-sm max-h-[110px] w-auto" />
-    <span class="text-xs text-gray-500 mt-1 block">Visualizing plans with tools like <a href="https://www.pgmustard.com/docs/explain" target="_blank">pgmustard.com/docs/explain</a></span>
-  </div>
+<div class="pg-figure">
+  <img src="/images/pgmustard.png" alt="pgMustard EXPLAIN tool" class="rounded border border-gray-300 shadow-sm max-h-[140px] w-auto" />
+  <span class="text-xs text-gray-500 mt-1 block">Visualizing plans with tools like <a href="https://www.pgmustard.com/docs/explain" target="_blank">pgmustard.com/docs/explain</a></span>
 </div>
 
 ---
