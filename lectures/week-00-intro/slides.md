@@ -8,7 +8,7 @@ addons:
 
 # Week 0: Intro
 
-Practical Course: SQL, Winter Semester 2026/27
+Data Management Lab, Winter Semester 2026/27
 
 ---
 layout: two-cols-header
