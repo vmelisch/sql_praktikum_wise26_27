@@ -225,7 +225,7 @@ const portalHtml = `<!DOCTYPE html>
     <header>
       <div class="eyebrow">TU Dresden &bull; Database Research Group</div>
       <h1>Data Management Lab</h1>
-      <p class="subtitle">Winter Semester 2026/27 &bull; Practical Course Slide Decks</p>
+      <p class="subtitle">Winter Semester 2026/27 &bull; Slide Decks</p>
     </header>
 
     <main>
