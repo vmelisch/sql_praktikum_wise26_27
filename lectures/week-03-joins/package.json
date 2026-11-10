@@ -14,6 +14,6 @@
   "devDependencies": {
     "markdown-it": "^14.3.3",
     "slidev-addon-gsap": "^0.0.6",
-    "slidev-theme-tud-db": "^0.0.9"
+    "slidev-theme-tud-db": "^0.0.10"
   }
 }

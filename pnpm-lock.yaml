@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       slidev-theme-tud-db:
-        specifier: ^0.0.9
-        version: 0.0.9
+        specifier: ^0.0.10
+        version: 0.0.10
 
   lectures/week-00-intro:
     dependencies:
@@ -28,8 +28,8 @@ importers:
         specifier: ^0.0.6
         version: 0.0.6(@nuxt/kit@3.21.11)(@oxc-project/types@0.156.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.2.16)(srvx@1.0.8)(typescript@6.0.3)(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
       slidev-theme-tud-db:
-        specifier: ^0.0.9
-        version: 0.0.9(@nuxt/kit@3.21.11)(@oxc-project/types@0.156.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.2.16)(srvx@1.0.8)(typescript@6.0.3)(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+        specifier: ^0.0.10
+        version: 0.0.10(@nuxt/kit@3.21.11)(@oxc-project/types@0.156.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.2.16)(srvx@1.0.8)(typescript@6.0.3)(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
 
   lectures/week-01-case:
     dependencies:
@@ -47,8 +47,8 @@ importers:
         specifier: ^0.0.6
         version: 0.0.6(@nuxt/kit@3.21.11)(@oxc-project/types@0.156.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.2.16)(srvx@1.0.8)(typescript@6.0.3)(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
       slidev-theme-tud-db:
-        specifier: ^0.0.9
-        version: 0.0.9(@nuxt/kit@3.21.11)(@oxc-project/types@0.156.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.2.16)(srvx@1.0.8)(typescript@6.0.3)(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+        specifier: ^0.0.10
+        version: 0.0.10(@nuxt/kit@3.21.11)(@oxc-project/types@0.156.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.2.16)(srvx@1.0.8)(typescript@6.0.3)(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
 
   lectures/week-02-subqueries:
     dependencies:
@@ -66,8 +66,8 @@ importers:
         specifier: ^0.0.6
         version: 0.0.6(@nuxt/kit@3.21.11)(@oxc-project/types@0.156.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.2.16)(srvx@1.0.8)(typescript@6.0.3)(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
       slidev-theme-tud-db:
-        specifier: ^0.0.9
-        version: 0.0.9(@nuxt/kit@3.21.11)(@oxc-project/types@0.156.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.2.16)(srvx@1.0.8)(typescript@6.0.3)(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+        specifier: ^0.0.10
+        version: 0.0.10(@nuxt/kit@3.21.11)(@oxc-project/types@0.156.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.2.16)(srvx@1.0.8)(typescript@6.0.3)(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
 
   lectures/week-03-joins:
     dependencies:
@@ -85,8 +85,8 @@ importers:
         specifier: ^0.0.6
         version: 0.0.6(@nuxt/kit@3.21.11)(@oxc-project/types@0.156.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.2.16)(srvx@1.0.8)(typescript@6.0.3)(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
       slidev-theme-tud-db:
-        specifier: ^0.0.9
-        version: 0.0.9(@nuxt/kit@3.21.11)(@oxc-project/types@0.156.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.2.16)(srvx@1.0.8)(typescript@6.0.3)(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+        specifier: ^0.0.10
+        version: 0.0.10(@nuxt/kit@3.21.11)(@oxc-project/types@0.156.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.2.16)(srvx@1.0.8)(typescript@6.0.3)(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
 
   lectures/week-04-set-operations:
     dependencies:
@@ -104,8 +104,8 @@ importers:
         specifier: ^0.0.6
         version: 0.0.6(@nuxt/kit@3.21.11)(@oxc-project/types@0.156.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.2.16)(srvx@1.0.8)(typescript@6.0.3)(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
       slidev-theme-tud-db:
-        specifier: ^0.0.9
-        version: 0.0.9(@nuxt/kit@3.21.11)(@oxc-project/types@0.156.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.2.16)(srvx@1.0.8)(typescript@6.0.3)(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+        specifier: ^0.0.10
+        version: 0.0.10(@nuxt/kit@3.21.11)(@oxc-project/types@0.156.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.2.16)(srvx@1.0.8)(typescript@6.0.3)(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
 
 packages:
 
@@ -2551,8 +2551,8 @@ packages:
     resolution: {integrity: sha512-yB0hOIf/8EIOKFdBePJnerQuwpvro9t1jUNuURAAmGfyXTh8UlavfiCJ68EWNrNT+IwnR8x/CvPyzRDnVLezbA==}
     engines: {node: '>=18.0.0'}
 
-  slidev-theme-tud-db@0.0.9:
-    resolution: {integrity: sha512-HOTUAtMZUW9AXAx+Db7e7huMt0LwKejxF8eTOftAgirBcTKM0YiPNV1nYTwG3hdF28tMIRUAs8sNLMC8kJQE4w==}
+  slidev-theme-tud-db@0.0.10:
+    resolution: {integrity: sha512-DCBolBj3VLWwujtyrs9dPCQKLP37q93DkLr0Vqjtoj7zHZk8IbQfo+h26DxCTzKX6VUkVQsK0krl+9WvCPKD8g==}
     engines: {node: '>=18.0.0', slidev: '>=0.48.0'}
 
   source-map-js@1.2.2:
@@ -6446,7 +6446,7 @@ snapshots:
       - vite
       - webpack
 
-  slidev-theme-tud-db@0.0.9:
+  slidev-theme-tud-db@0.0.10:
     dependencies:
       shiki: 4.6.0
       slidev-addon-gsap: 0.0.4
@@ -6490,7 +6490,7 @@ snapshots:
       - vite
       - webpack
 
-  slidev-theme-tud-db@0.0.9(@nuxt/kit@3.21.11)(@oxc-project/types@0.156.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.2.16)(srvx@1.0.8)(typescript@6.0.3)(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)):
+  slidev-theme-tud-db@0.0.10(@nuxt/kit@3.21.11)(@oxc-project/types@0.156.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.2.16)(srvx@1.0.8)(typescript@6.0.3)(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)):
     dependencies:
       shiki: 4.6.0
       slidev-addon-gsap: 0.0.4(@nuxt/kit@3.21.11)(@oxc-project/types@0.156.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.2.16)(srvx@1.0.8)(typescript@6.0.3)(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
