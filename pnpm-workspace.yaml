@@ -6,8 +6,8 @@ shamefullyHoist: true
 allowBuilds:
   playwright-chromium: true
 
+# Our own theme, released by its repo's CI: every version may be installed
+# right away. (By name: pnpm 11.7's lockfile check, which CI runs, ignores
+# version-pinned entries such as slidev-theme-tud-db@0.0.10.)
 minimumReleaseAgeExclude:
-  - slidev-theme-tud-db@0.0.7
-  - slidev-theme-tud-db@0.0.8
-  - slidev-theme-tud-db@0.0.9
-  - slidev-theme-tud-db@0.0.10
+  - slidev-theme-tud-db
