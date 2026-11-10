@@ -48,11 +48,12 @@ export function tintIn(target: string | HTMLElement[], color: Tint, duration = 0
 /**
  * Everything in the code blocks matching `code` that lies outside the marks
  * matching `marks`: each line's tokens and other marks, to fade so that only
- * the marked part stands out. (As in week 1.)
+ * the marked part stands out. (As in week 1.) Only fenced code: highlighted
+ * inline code in the text around it has `.line`s too, and stays as it is.
  */
 export function outside(root: ParentNode, code: string, marks: string): HTMLElement[] {
   const keep = new Set(root.querySelectorAll(marks))
-  return [...root.querySelectorAll<HTMLElement>(`${code} .line > *`)].filter(el => !keep.has(el))
+  return [...root.querySelectorAll<HTMLElement>(`${code} pre .line > *`)].filter(el => !keep.has(el))
 }
 
 /** The body rows of the tables matching `table`. */

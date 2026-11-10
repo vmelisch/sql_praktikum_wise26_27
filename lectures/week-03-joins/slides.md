@@ -348,6 +348,13 @@ JOIN customers USING (c_id);
   align-items: flex-start;
   gap: 48px;
 }
+/* The query keeps the width of its longer state (its first line, 36
+   characters, plus the block's 10px right padding), so the tables don't move
+   when the magic-move shortens it to SELECT *. (:deep, as the magic-move
+   component renders the block.) */
+.using-row :deep(.slidev-code) {
+  min-width: calc(36ch + 10px);
+}
 </style>
 
 ---
@@ -670,16 +677,9 @@ onMounted(() => {
   tintKeys(root, { 1: 'teal', 3: 'purple' })
   const nulls = chips([...root.querySelectorAll<HTMLElement>('.result td')].filter(td => td.textContent!.trim() === 'NULL'))
 
+  // the left and right table are coloured from the start (see the style below)
   tl.step()
-    // click 1: the left table, the one LEFT JOIN keeps all rows of
-    .to(...markColor('.mark-left', 'teal'))
-    .fadeIn('.mark-why-left', {}, '<')
-    .step()
-    // click 2: the right table, which only adds its matching rows
-    .to(...markColor('.mark-right', 'blue'))
-    .fadeIn('.mark-why-right', {}, '<')
-    .step()
-    // click 3: the right table's columns, NULL for the order without a customer
+    // click 1: the right table's columns, NULL for the order without a customer
     .to(...markColor('.mark-right-cols', 'blue'))
     .fadeIn('.mark-why-null', {}, '<')
     .fromTo(...tintIn(nulls, 'blue'), '<')
@@ -747,6 +747,18 @@ ON orders.c_id = customers.c_id;  ⟦why-null:-- no matching customer: NULLs⟧
 </div>
 </div>
 
+<style>
+/* The left table, the one LEFT JOIN keeps all rows of, in teal, and the right
+   table, which only adds its matching rows, in blue: from the start, as in the
+   text above. (!important: Shiki colours each token inline.) */
+:is(.mark-left, .mark-left span) {
+  color: var(--db-accent1) !important;
+}
+:is(.mark-right, .mark-right span) {
+  color: var(--db-accent3) !important;
+}
+</style>
+
 ---
 layout: default
 ---
@@ -765,16 +777,9 @@ onMounted(() => {
   tintKeys(root, { 1: 'teal', 3: 'purple' })
   const nulls = chips([...root.querySelectorAll<HTMLElement>('.result td')].filter(td => td.textContent!.trim() === 'NULL'))
 
+  // the left and right table are coloured from the start (see the style below)
   tl.step()
-    // click 1: the left table, which RIGHT JOIN only takes matching rows from
-    .to(...markColor('.mark-left', 'blue'))
-    .fadeIn('.mark-why-left', {}, '<')
-    .step()
-    // click 2: the right table, the one it keeps all rows of
-    .to(...markColor('.mark-right', 'teal'))
-    .fadeIn('.mark-why-right', {}, '<')
-    .step()
-    // click 3: the left table's columns, NULL for the customer without an
+    // click 1: the left table's columns, NULL for the customer without an
     // order (c_id too: it is the order's c_id)
     .to(...markColor('.mark-left-cols', 'blue'))
     .fadeIn('.mark-why-null', {}, '<')
@@ -842,6 +847,18 @@ ON orders.c_id = customers.c_id;  ⟦why-null:-- no matching order: NULLs⟧
 
 </div>
 </div>
+
+<style>
+/* The left table, which RIGHT JOIN only takes matching rows from, in blue, and
+   the right table, the one it keeps all rows of, in teal: from the start, as
+   in the text above. (!important: Shiki colours each token inline.) */
+:is(.mark-left, .mark-left span) {
+  color: var(--db-accent3) !important;
+}
+:is(.mark-right, .mark-right span) {
+  color: var(--db-accent1) !important;
+}
+</style>
 
 ---
 layout: default
@@ -1213,7 +1230,7 @@ const nested: JoinNode = { op: 'left', left: 'customers', right: { op: 'right', 
 - Rule of Thumb: Joins are processed **sequentially from top to bottom**<br>i.e. *result from the first join becomes the left input for the second join*
 
 <div class="order">
-<div class="bullet-indent" data-morph="order-seq">
+<div class="bullet-indent">
 
 ```sql
 SELECT *
@@ -1229,7 +1246,7 @@ RIGHT JOIN shipments s ON s.order_id = o.id;
 - Parentheses overwrite the natural order
 
 </div>
-<div v-click="2" class="bullet-indent" data-morph="order-nested">
+<div v-click="2" class="bullet-indent">
 
 ```sql
 SELECT *
@@ -1341,7 +1358,7 @@ onMounted(() => {
 ## Same joins, different order, different result
 
 <div class="order-out bullet-indent">
-<div data-morph="order-seq">
+<div>
 
 ```sql
 SELECT c.name, o.id AS o_id, s.id AS s_id
@@ -1360,7 +1377,7 @@ RIGHT JOIN shipments s ON s.order_id = o.id;
 | `{sql} NULL` | `{sql} NULL` | 2 |
 
 </div>
-<div data-morph="order-nested">
+<div>
 
 ```sql
 SELECT c.name, o.id AS o_id, s.id AS s_id
