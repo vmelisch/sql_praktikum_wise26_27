@@ -17,6 +17,6 @@
     "build:all": "node scripts/build-all.mjs"
   },
   "dependencies": {
-    "slidev-theme-tud-db": "^0.0.10"
+    "slidev-theme-tud-db": "^0.0.11"
   }
 }
