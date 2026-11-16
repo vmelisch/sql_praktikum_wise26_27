@@ -42,13 +42,22 @@ layout: default
 </div>
 
 ---
+layout: section-num
+num: 1
+---
+
+# Operating on a single SQL statement
+
+e.g., `{sql} DISTINCT`, `{sql} DISTINCT ON`
+
+---
 layout: default
 ---
 
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { useTl } from 'slidev-addon-gsap'
-import { TINT, tintIn } from './setops'
+import { chips, TINT, tintIn } from './setops'
 
 const orders = [[1, 'Anna', 'Apple'], [2, 'Ben', 'Banana'], [3, 'Anna', 'Apple'], [4, 'Clara', 'Apple'], [5, 'Ben', 'Banana']]
 const out1 = [['Apple'], ['Banana']]
@@ -57,21 +66,21 @@ const out2 = [['Anna', 'Apple'], ['Ben', 'Banana'], ['Clara', 'Apple']]
 const tl = useTl()
 onMounted(() => {
   tl.step()
-    // click 1: only `product` is selected, so only it decides what is a
-    // duplicate: the other columns step back, equal products share a colour,
-    // and each colour becomes one output row
-    .fadeIn('.q1')
+    // click 1 (the first query is there from the start): only `product` is
+    // selected, so only it decides what is a duplicate: the other columns step
+    // back, equal products share a colour, and each colour becomes one output row
+    .fadeIn('.out1')
     .to('.orders :is(.c1, .c2)', { opacity: 0.3, duration: 0.4 }, '<')
-    .fromTo(...tintIn('.orders :is(.r1, .r3, .r4) .c3', 'teal'), '<')
-    .fromTo(...tintIn('.orders :is(.r2, .r5) .c3', 'purple'), '<')
+    .fromTo(...tintIn(chips('.orders', [1, 3, 4], 3), 'teal'), '<')
+    .fromTo(...tintIn(chips('.orders', [2, 5], 3), 'purple'), '<')
     .step()
     // click 2: now (customer, product) decides, and Clara's Apple is its own row
     .fadeIn('.q2')
     .to('.orders .c2', { opacity: 1, duration: 0.4 }, '<')
-    .fromTo(...tintIn('.orders :is(.r1, .r3) .c2', 'teal'), '<')
-    .fromTo(...tintIn('.orders :is(.r2, .r5) .c2', 'purple'), '<')
-    .fromTo(...tintIn('.orders .r4 .c2', 'yellow'), '<')
-    .to('.orders .r4 .c3', { backgroundColor: TINT.yellow, duration: 0.4 }, '<')
+    .fromTo(...tintIn(chips('.orders', [1, 3], 2), 'teal'), '<')
+    .fromTo(...tintIn(chips('.orders', [2, 5], 2), 'purple'), '<')
+    .fromTo(...tintIn(chips('.orders', [4], 2), 'yellow'), '<')
+    .to(chips('.orders', [4], 3), { backgroundColor: TINT.yellow, duration: 0.4 }, '<')
     .step()
     // click 3: the same queries with GROUP BY (the code magic-moves at click 3)
     .fadeIn('.same-as')
@@ -98,7 +107,7 @@ onMounted(() => {
 <FlowArrow />
 <div class="group" style="gap: 36px">
 <div class="q1">
-<div class="lines-3">
+<div class="code-room" style="--lines: 3; --cols: 23">
 
 ````md magic-move {at:3}
 ```sql
@@ -113,10 +122,10 @@ GROUP BY product;
 ````
 
 </div>
-<DbTable caption="Output" :head="['product']" :rows="out1" :tints="['teal', 'purple']" />
+<DbTable class="out1" caption="Output" :head="['product']" :rows="out1" :tints="['teal', 'purple']" />
 </div>
 <div class="q2">
-<div class="lines-3">
+<div class="code-room" style="--lines: 3; --cols: 33">
 
 ````md magic-move {at:3}
 ```sql
@@ -143,7 +152,7 @@ layout: default
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { useSlide, useTl } from 'slidev-addon-gsap'
-import { TINT } from './setops'
+import { chips, tintIn } from './setops'
 
 const head = ['id', 'customer', 'product']
 const orders = [[1, 'Anna', 'Apple'], [2, 'Ben', 'Banana'], [3, 'Anna', 'Orange'], [4, 'Clara', 'Orange'], [5, 'Ben', 'Apple'], [6, 'Anna', 'Banana']]
@@ -154,16 +163,35 @@ const sortedIndex = [0, 3, 1, 5, 4, 2]
 const tl = useTl()
 const slide = useSlide()
 onMounted(() => {
-  const rowHeight = slide.value?.querySelector<HTMLElement>('.orders .r1')?.offsetHeight ?? 0
+  // the zebra shades of the first and the second row
+  const zebra = [...slide.value?.querySelectorAll<HTMLElement>('.orders :is(.r1, .r2)') ?? []]
+    .map(row => getComputedStyle(row).backgroundColor)
   tl.step()
-    // click 1: ORDER BY customer, id: the rows move into that order, one colour
-    // per customer (the code highlights the ORDER BY line at the same click)
-    .to('.orders tbody tr', { y: (i: number) => (sortedIndex[i] - i) * rowHeight, duration: 0.7, ease: 'power2.inOut' })
-    .to('.orders :is(.r1, .r3, .r6)', { backgroundColor: TINT.teal, duration: 0.4 }, '<')
-    .to('.orders :is(.r2, .r5)', { backgroundColor: TINT.purple, duration: 0.4 }, '<')
-    .to('.orders .r4', { backgroundColor: TINT.yellow, duration: 0.4 }, '<')
+    // click 1: the query has no ORDER BY yet. DISTINCT ON (customer) makes the
+    // rows of a customer duplicates of each other: one colour per customer, and
+    // under the query the question which of them is kept (without an order, any
+    // of them)
+    .fromTo(...tintIn(chips('.orders', [1, 3, 6], 2), 'teal'))
+    .fromTo(...tintIn(chips('.orders', [2, 5], 2), 'purple'), '<')
+    .fromTo(...tintIn(chips('.orders', [4], 2), 'yellow'), '<')
+    .fadeIn('.ask', {}, '<')
     .step()
-    // click 2: DISTINCT ON (customer) keeps the first row of each customer
+    // click 2: the answer takes the question's place: ORDER BY customer, id
+    // (the code magic-moves the line in and highlights it at the same click)
+    .fadeOut('.ask', { duration: 0.3 })
+    .step()
+    // click 3: the rows move into that order, each taking the zebra shade of
+    // its new place. The move is in row heights (yPercent), not px: a slide
+    // that is preloaded while the one before it is shown is hidden, and its
+    // rows measure 0px.
+    .to('.orders tbody tr', {
+      yPercent: (i: number) => (sortedIndex[i] - i) * 100,
+      backgroundColor: (i: number) => zebra[sortedIndex[i] % 2],
+      duration: 0.7,
+      ease: 'power2.inOut',
+    })
+    .step()
+    // click 4: DISTINCT ON (customer) keeps the first row of each customer
     .to('.orders :is(.r3, .r5, .r6)', { opacity: 0.3, duration: 0.4 })
     .fadeIn('.to-out', {}, '<')
     .fadeIn('.out', {}, '<')
@@ -182,9 +210,17 @@ onMounted(() => {
 <div class="pipeline mt-3">
 <DbTable class="orders" caption="Orders" :head="head" :rows="orders" />
 <FlowArrow />
-<div>
+<div class="code-room" style="--lines: 6">
 
-```sql {all|6|1}{at:1}
+````md magic-move {at:2}
+```sql
+SELECT DISTINCT ON (customer)
+  customer,
+  product,
+  id
+FROM orders;
+```
+```sql {6|6|1}
 SELECT DISTINCT ON (customer)
   customer,
   product,
@@ -192,13 +228,30 @@ SELECT DISTINCT ON (customer)
 FROM orders
 ORDER BY customer, id;
 ```
+````
+
+<div class="under-code ask" style="--after: 5">
+
+::takeaway{label="Question"}
+Which row should be returned for each unique customer?
+::
 
 </div>
+</div>
 <FlowArrow class="to-out" />
-<DbTable class="out" caption="Output" :head="head" :rows="kept" :tints="['teal', 'purple', 'yellow']" />
+<DbTable class="out" caption="Output" :head="head" :rows="kept" :tints="['teal', 'purple', 'yellow']" :tint-cols="[2]" />
 </div>
 
 <div class="footnote">*PostgreSQL only</div>
+
+---
+layout: section-num
+num: 2
+---
+
+# Combining multiple query outputs
+
+e.g., `{sql} UNION`, `{sql} INTERSECT`, `{sql} EXCEPT`
 
 ---
 layout: default
@@ -275,32 +328,29 @@ layout: default
 
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { usePos, useTl, useTwo } from 'slidev-addon-gsap'
-import { TINT } from './setops'
+import { useTl } from 'slidev-addon-gsap'
+import { bothIn, chips, tintIn } from './setops'
 
 const head = ['id', 'name']
+// the chips of the names in the given rows of an input table
+const names = (table: string, ...rows: number[]) => chips(table, rows, 2)
 const eu = [[1, 'Anna'], [2, 'Ben'], [3, 'Clara']]
 const us = [[1, 'Ben'], [2, 'David'], [3, 'Emma']]
 const union = [['Anna'], ['Ben'], ['Clara'], ['David'], ['Emma']]
 const unionAll = [['Anna'], ['Ben'], ['Clara'], ['Ben'], ['David'], ['Emma']]
 
 const tl = useTl()
-const two = useTwo()
-usePos() // registers the '.sel@anchor' resolver the pairing line needs
-
 onMounted(() => {
-  const ben = two.mkPath({ stroke: '#4c4d4d', linewidth: 1.5, head: false }).M('.eu .r2@r').L('.us .r1@l')
   tl.step()
-    // click 1: colour each row by where its name occurs (as in the Venn
-    // diagram), then the UNION result: every colour, Ben only once
-    .to('.eu :is(.r1, .r3)', { backgroundColor: TINT.teal, duration: 0.4 })
-    .to('.eu .r2, .us .r1', { backgroundColor: TINT.yellow, duration: 0.4 }, '<')
-    .to('.us :is(.r2, .r3)', { backgroundColor: TINT.purple, duration: 0.4 }, '<')
+    // click 1: colour each name by where it occurs (as in the Venn diagram),
+    // then the UNION result: every colour, Ben only once
+    .fromTo(...tintIn(names('.eu', 1, 3), 'teal'))
+    .fromTo(...bothIn(`${names('.eu', 2)}, ${names('.us', 1)}`), '<')
+    .fromTo(...tintIn(names('.us', 2, 3), 'purple'), '<')
     .fadeIn('.to-res')
     .fadeIn('.res1', {}, '<')
     .step()
     // click 2: UNION ALL (the code magic-moves at click 2) keeps both Bens
-    .from(ben, { end: 0, duration: 0.5 })
     .fadeIn('.res2')
     .step()
 })
@@ -341,8 +391,8 @@ SELECT name FROM customers_us;
 </div>
 <FlowArrow class="to-res" />
 <div class="group">
-<DbTable class="res1" caption="UNION" code :head="['name']" :rows="union" :tints="['teal', 'yellow', 'teal', 'purple', 'purple']" />
-<DbTable class="res2" caption="UNION ALL" code :head="['name']" :rows="unionAll" :tints="['teal', 'yellow', 'teal', 'yellow', 'purple', 'purple']" />
+<DbTable class="res1" caption="UNION" code :head="['name']" :rows="union" :tints="['teal', 'both', 'teal', 'purple', 'purple']" />
+<DbTable class="res2" caption="UNION ALL" code :head="['name']" :rows="unionAll" :tints="['teal', 'both', 'teal', 'both', 'purple', 'purple']" />
 </div>
 </div>
 
@@ -352,33 +402,30 @@ layout: default
 
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { usePos, useTl, useTwo } from 'slidev-addon-gsap'
-import { TINT } from './setops'
+import { useTl } from 'slidev-addon-gsap'
+import { bothIn, chips, tintIn } from './setops'
 
 const head = ['id', 'name']
+// the chips of the names in the given rows of an input table
+const names = (table: string, ...rows: number[]) => chips(table, rows, 2)
 const eu = [[1, 'Anna'], [2, 'Anna'], [3, 'Ben'], [4, 'Clara']]
 const us = [[1, 'Anna'], [2, 'Anna'], [3, 'Ben'], [4, 'David'], [5, 'Ben']]
 
 const tl = useTl()
-const two = useTwo()
-usePos() // registers the '.sel@anchor' resolver the pairing lines need
-
 onMounted(() => {
-  const line = { stroke: '#4c4d4d', linewidth: 1.5, head: false }
-  const pairs = [1, 2, 3].map(i => two.mkPath(line).M(`.eu .r${i}@r`).L(`.us .r${i}@l`))
   tl.step()
-    // click 1: colour each row by where its name occurs; INTERSECT keeps the
-    // names in both, once each
-    .to('.eu :is(.r1, .r2, .r3), .us :is(.r1, .r2, .r3, .r5)', { backgroundColor: TINT.yellow, duration: 0.4 })
-    .to('.eu .r4', { backgroundColor: TINT.teal, duration: 0.4 }, '<')
-    .to('.us .r4', { backgroundColor: TINT.purple, duration: 0.4 }, '<')
+    // click 1: colour each name by where it occurs; INTERSECT keeps the names
+    // in both, once each
+    .fromTo(...bothIn(`${names('.eu', 1, 2, 3)}, ${names('.us', 1, 2, 3, 5)}`))
+    .fromTo(...tintIn(names('.eu', 4), 'teal'), '<')
+    .fromTo(...tintIn(names('.us', 4), 'purple'), '<')
     .fadeIn('.to-res')
     .fadeIn('.res1', {}, '<')
     .step()
     // click 2: INTERSECT ALL pairs equal rows one to one; the second US Ben has
     // no partner left, so only min(1, 2) = 1 Ben is kept
-    .from(pairs, { end: 0, duration: 0.5, stagger: 0.1 })
-    .to('.us .r5', { backgroundColor: TINT.purple, duration: 0.4 })
+    .to(names('.us', 5), { '--both': 0, duration: 0.4 })
+    .fromTo(...tintIn(names('.us', 5), 'purple'), '<')
     .fadeIn('.res2', {}, '<')
     .step()
 })
@@ -419,8 +466,8 @@ SELECT name FROM customers_us;
 </div>
 <FlowArrow class="to-res" />
 <div class="group">
-<DbTable class="res1" caption="INTERSECT" code :head="['name']" :rows="[['Anna'], ['Ben']]" :tints="['yellow', 'yellow']" />
-<DbTable class="res2" caption="INTERSECT ALL" code :head="['name']" :rows="[['Anna'], ['Anna'], ['Ben']]" :tints="['yellow', 'yellow', 'yellow']" />
+<DbTable class="res1" caption="INTERSECT" code :head="['name']" :rows="[['Anna'], ['Ben']]" :tints="['both', 'both']" />
+<DbTable class="res2" caption="INTERSECT ALL" code :head="['name']" :rows="[['Anna'], ['Anna'], ['Ben']]" :tints="['both', 'both', 'both']" />
 </div>
 </div>
 
@@ -430,36 +477,32 @@ layout: default
 
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { usePos, useTl, useTwo } from 'slidev-addon-gsap'
-import { TINT } from './setops'
+import { useTl } from 'slidev-addon-gsap'
+import { bothIn, chips, tintIn } from './setops'
 
 const head = ['id', 'name']
+// the chips of the names in the given rows of an input table
+const names = (table: string, ...rows: number[]) => chips(table, rows, 2)
 const eu = [[1, 'Anna'], [2, 'Anna'], [3, 'Ben'], [4, 'Clara'], [5, 'Emma']]
 const us = [[1, 'Anna'], [2, 'Ben'], [3, 'David']]
 
 const tl = useTl()
-const two = useTwo()
-usePos() // registers the '.sel@anchor' resolver the pairing lines need
-
 onMounted(() => {
-  const line = { stroke: '#4c4d4d', linewidth: 1.5, head: false }
-  const pairs = [
-    two.mkPath(line).M('.eu .r1@r').L('.us .r1@l'), // Anna
-    two.mkPath(line).M('.eu .r3@r').L('.us .r2@l'), // Ben
-  ]
   tl.step()
-    // click 1: colour each row by where its name occurs; EXCEPT keeps the
-    // names only in customers_eu
-    .to('.eu :is(.r1, .r2, .r3), .us :is(.r1, .r2)', { backgroundColor: TINT.yellow, duration: 0.4 })
-    .to('.eu :is(.r4, .r5)', { backgroundColor: TINT.teal, duration: 0.4 }, '<')
-    .to('.us .r3', { backgroundColor: TINT.purple, duration: 0.4 }, '<')
+    // click 1: colour each name by where it occurs; EXCEPT keeps the names
+    // only in customers_eu
+    .fromTo(...bothIn(`${names('.eu', 1, 2, 3)}, ${names('.us', 1, 2)}`))
+    .fromTo(...tintIn(names('.eu', 4, 5), 'teal'), '<')
+    .fromTo(...tintIn(names('.us', 3), 'purple'), '<')
     .fadeIn('.to-res')
     .fadeIn('.res1', {}, '<')
     .step()
     // click 2: EXCEPT ALL cancels rows pairwise; the second Anna has no
-    // partner in customers_us, so 2 − 1 = 1 Anna stays
-    .from(pairs, { end: 0, duration: 0.5, stagger: 0.1 })
-    .to('.eu .r2', { backgroundColor: TINT.teal, duration: 0.4 })
+    // partner in customers_us, so 2 − 1 = 1 Anna stays (the sum under the
+    // result tables)
+    .to(names('.eu', 2), { '--both': 0, duration: 0.4 })
+    .fromTo(...tintIn(names('.eu', 2), 'teal'), '<')
+    .fadeIn('.sum', {}, '<')
     .fadeIn('.res2', {}, '<')
     .step()
 })
@@ -501,6 +544,7 @@ SELECT name FROM customers_us;
 <div class="group">
 <DbTable class="res1" caption="EXCEPT" code :head="['name']" :rows="[['Clara'], ['Emma']]" :tints="['teal', 'teal']" />
 <DbTable class="res2" caption="EXCEPT ALL" code :head="['name']" :rows="[['Anna'], ['Clara'], ['Emma']]" :tints="['teal', 'teal', 'teal']" />
+<div class="under-tables sum"><span class="table-footer">2 × Anna <span class="not-italic">−</span> 1 × Anna = 1 × Anna</span></div>
 </div>
 </div>
 

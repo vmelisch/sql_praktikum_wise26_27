@@ -19,9 +19,26 @@
   align-items: flex-start;
   gap: 16px;
 }
-/* Room between the two input tables for the lines that pair equal rows. */
+/* The two input tables of a set operation stand further apart than the two
+   result tables. */
 .pipeline .group.inputs {
   gap: 40px;
+}
+/* A note centred under a group of tables (give it the theme's .table-footer
+   look: small, grey, italic). Out of the flow, so the group stays as tall as
+   its tables and nothing moves; the note may be wider than the tables. */
+.pipeline .group {
+  position: relative;
+}
+.pipeline .group > .under-tables {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 6px;
+  display: flex;
+  justify-content: center;
+  white-space: nowrap;
 }
 
 /* Holds a code block plus <Scope> boxes behind some of its lines. flow-root
@@ -40,10 +57,28 @@ html .slidev-layout.db-default .shiki-magic-move-container.slidev-code {
   --slidev-code-padding: 4px 10px 4px 0;
 }
 
-/* Reserve the height of a 3-line code block, so a magic-move that grows from
-   2 to 3 lines doesn't push the table below it down. */
-.lines-3 {
-  min-height: calc(3 * var(--slidev-code-font-size) * var(--slidev-code-line-height) + 16px);
+/* Reserve the box of a magic-move block's largest state, so the code can
+   change without moving what is below or beside it: --lines lines high and
+   --cols characters wide (the longest line of any state; not needed when that
+   line is in every state). */
+.code-room {
+  min-height: calc(var(--lines) * var(--slidev-code-font-size) * var(--slidev-code-line-height) + 16px);
+}
+.code-room .slidev-code {
+  min-width: calc(var(--cols, 0) * 1ch + 10px);
+}
+/* Something right under the code in a .code-room (a question about the query):
+   it starts where line --after of the code ends (the lines start 8px into the
+   room), and its own margin is the gap. Out of the flow, so it neither moves
+   the row the query sits in nor wraps at the query's width. */
+.code-room {
+  position: relative;
+}
+.code-room > .under-code {
+  position: absolute;
+  left: 0;
+  top: calc(var(--after) * var(--slidev-code-font-size) * var(--slidev-code-line-height) + 8px);
+  white-space: nowrap;
 }
 
 /* Intro slide: each flavour next to a small picture of it. */
