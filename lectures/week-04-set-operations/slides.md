@@ -397,6 +397,117 @@ SELECT name FROM customers_us;
 </div>
 
 ---
+layout: two-cols-header
+columns: 56fr 44fr
+---
+
+<script setup lang="ts">
+import { onMounted } from 'vue'
+import { useTl } from 'slidev-addon-gsap'
+
+const setRows = [['Anna', 1], ['Ben', 1], ['Clara', 1], ['David', 1], ['Emma', 1]]
+const bagRows = [['Anna', 1], ['Ben', 2], ['Clara', 1], ['David', 1], ['Emma', 1]]
+const sumRows = [['Anna', 2], ['Ben', 3], ['Clara', 2], ['David', 2], ['Emma', 2]]
+
+const tl = useTl()
+onMounted(() => {
+  tl.step()
+    .fadeIn('.in-sql')
+    .step()
+    .fadeIn('.calc')
+    .fadeIn('.merge-arrow', {}, '<')
+    .fadeIn('.res-all', {}, '<')
+    .step()
+})
+</script>
+
+# Sets vs. Multisets
+
+::left::
+
+<div class="set-ex">
+
+## Set vs. Multiset
+
+- **Set:** unique elements only, e.g., $\lbrace \text{Anna}, \text{Ben} \rbrace$
+- **Multiset (bag):** duplicates allowed, e.g., $\lbrace\!\lbrace \text{Anna}, \text{Ben}, \text{Ben} \rbrace\!\rbrace$
+
+</div>
+
+<div class="in-sql">
+
+## In SQL
+
+- **Multiset semantics** is the default in SQL (e.g., `{sql} SELECT` returns duplicates)
+- `{sql} UNION`, `{sql} INTERSECT`, and `{sql} EXCEPT` use **set semantics** (unique rows only)
+- Use `{sql} ALL` to restore **multiset semantics** for those operations
+
+</div>
+
+<div class="calc">
+
+## Calculating with Multisets
+
+- Operations combine element counts
+- `{sql} UNION ALL`: add counts (Ben: $1 + 2 = 3$)
+
+</div>
+
+::right::
+
+<div class="right-stack">
+<div class="pipeline" style="gap: 20px; align-items: flex-start">
+<DbTable caption="Set (UNION)" :head="['name', 'count']" :rows="setRows" />
+<DbTable caption="Multiset (UNION ALL)" :head="['name', 'count']" :rows="bagRows" />
+</div>
+
+<div class="merge-arrow">
+<svg class="down-arrow" viewBox="0 0 12 22" width="12" height="22">
+  <path d="M6 1v18M1.5 14.5L6 19.5l4.5-5" />
+</svg>
+
+`{sql} UNION ALL`
+
+</div>
+
+<DbTable class="res-all" caption="Combined Multiset" :head="['name', 'count']" :rows="sumRows" />
+</div>
+
+<style>
+.slidev-layout.db-default .set-ex .katex {
+  font-size: 0.88em;
+}
+.right-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.right-stack :deep(table th),
+.right-stack :deep(table td) {
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+.merge-arrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 2px 0;
+}
+.merge-arrow p {
+  margin: 0;
+}
+.down-arrow {
+  flex: none;
+  fill: none;
+  stroke: var(--db-table-rule);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+</style>
+
+---
 layout: default
 ---
 
