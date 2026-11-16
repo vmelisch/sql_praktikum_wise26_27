@@ -220,7 +220,7 @@ SELECT DISTINCT ON (customer)
   id
 FROM orders;
 ```
-```sql {6|6|1}
+```sql {6|6|all}
 SELECT DISTINCT ON (customer)
   customer,
   product,
@@ -276,6 +276,9 @@ onMounted(() => {
     .fadeIn('.v3-a', {}, '<')
     .fadeIn('.eq', {}, '<')
     .step()
+    // click 4: compatible data types table
+    .fadeIn('.compat')
+    .step()
 })
 </script>
 
@@ -286,13 +289,29 @@ onMounted(() => {
 - Goal: Combine outputs of multiple SQL statements into a single result set
 - Three operations: `{sql} UNION`, `{sql} INTERSECT`, `{sql} EXCEPT`
 
-<div class="rules mt-3 pl-[1.1em]">
+<div class="rules-row mt-3">
+<div class="rules pl-[1.1em]">
 
-1. Must have the same number of columns
-2. Matching is done by column position, not by name
-3. Columns must have compatible data types
-4. `{sql} UNION` and `{sql} EXCEPT` associate left-to-right, but `{sql} INTERSECT` binds more tightly than those other two
+1. Same number of columns
+2. Matched by position, not name
+3. Compatible column data types
+4. `{sql} INTERSECT` binds tighter than `{sql} UNION` / `{sql} EXCEPT` (left-to-right)
 
+</div>
+
+<div class="compat">
+
+[Compatible data types]{.table-caption}
+
+| Type A | Type B | Result |
+| :--- | :--- | :--- |
+| `{sql} INT` | `{sql} NUMERIC` | `{sql} NUMERIC` |
+| `{sql} TEXT` | `{sql} VARCHAR(10)` | `{sql} TEXT` |
+| `{sql} DATE` | `{sql} TIMESTAMP` | `{sql} TIMESTAMP` |
+| `{sql} INT` | `{sql} NULL` | `{sql} INT` |
+| `{sql} INT` | `{sql} TEXT` | **Error** (cast) |
+
+</div>
 </div>
 
 <div class="example mt-3">
@@ -321,6 +340,17 @@ SELECT ... FROM C;
 <Venn3 />
 </div>
 </div>
+
+<style>
+.rules-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+.compat {
+  margin: 0 auto -72px;
+}
+</style>
 
 ---
 layout: default
